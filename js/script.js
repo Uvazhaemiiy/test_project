@@ -1,18 +1,38 @@
-"use strict";
+let a = ''; 
+let b = '';
+let sign = '';
+let finish = false;
 
-//const answer = +prompt("Вам есть 18?", "18")
-//console.log(answer + 5);
+const digit = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'];
+const action = ['-', '+', 'X', '/'];
 
+//Экран
+const out = document.querySelector('.calc-screen p');
 
-const user = 'toys';
+function clearAll () {
+    a = '';
+    b = '';
+    sign = '';
+    finish = false;
+    out.textContent = 0; 
+}
 
-alert(`Hi, ${user}`);
+document.querySelector('.ac').onclick = clearAll;
 
-let incr = 10,
-    decr = 10;
+document.querySelector('.buttons').onclick = (event) => {
+    //нажата не кнопка
+    if(!event.target.classList.contains('btn')) return;
+    //нажата кнопка clearAll ac
+    if(event.target.classList.contains('ac')) return;
 
-incr++;
-decr--;
+    out.textContent = '';
+    //получаю нажатую кнопку
+    const key = event.target.textContent;
 
-console.log(incr);
-console.log(decr);
+    //если нажата клавиша 0-9 или .
+    if (digit.includes(key)) {
+        a+=key;
+        console.log(a, b, sign);
+        out.textContent = a;
+    }
+} 
